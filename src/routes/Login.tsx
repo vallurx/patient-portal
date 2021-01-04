@@ -1,11 +1,12 @@
 import React, { CSSProperties, useState } from 'react';
-import { Alert, Button, Card, Form, Input } from 'antd';
+import { Alert, Button, Card, Form, Input, Typography } from 'antd';
 import axios from 'axios';
 import { PatientLoginResponse } from '../lib/types';
 import { useHistory } from 'react-router';
 import { ErrorTypes, getError } from '../lib/error-lookup';
 import { usePatient } from '../lib/data/use-patient';
 import logo from '../assets/VallurX Logo Light Transparent.png';
+import { Link } from 'react-router-dom';
 
 interface LoginForm {
     email: string;
@@ -84,6 +85,8 @@ const Login = () => {
                         <Button type="primary" htmlType="submit" loading={loading}>Login</Button>
                     </Form.Item>
                 </Form>
+
+                <Typography.Paragraph>Don't have an account? <Link to="/register">Register here!</Link></Typography.Paragraph>
             </Card>
         </div>
     )

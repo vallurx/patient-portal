@@ -1,16 +1,33 @@
 import React, { useState } from 'react';
-import { Button, Col, Divider, Form, Input, notification, Radio, Result, Row, Select, Typography, Upload } from 'antd';
+import {
+    Button,
+    Col,
+    Divider,
+    Form,
+    Image,
+    Input,
+    notification,
+    Radio,
+    Result,
+    Row,
+    Select,
+    Typography,
+    Upload
+} from 'antd';
 import { screeningQuestions } from '../lib/static-lists';
 import { DatePicker } from '../components/dayjs';
 import { axios } from '../lib/axios';
 import baseAxios from 'axios';
-import { IdcardOutlined } from '@ant-design/icons';
+import { CheckOutlined, IdcardOutlined } from '@ant-design/icons';
 import { RcFile } from 'antd/es/upload';
 import { useHistory } from 'react-router-dom';
+import { toBase64 } from '../lib/util';
 
 const Apply = () => {
     const history = useHistory();
+    const [form] = Form.useForm();
     const [workId, setWorkId] = useState<RcFile | undefined>();
+    const [workIdPreview, setWorkIdPreview] = useState<string | undefined>();
 
     const submitApplication = async (data: any) => {
         try {
@@ -64,6 +81,7 @@ const Apply = () => {
     return (
         <>
             <Form
+                form={form}
                 layout="vertical"
                 onFinish={submitApplication}
             >
@@ -73,7 +91,7 @@ const Apply = () => {
                     <div key={i}>
                         <Row gutter={8}>
                             <Col span={16}>
-                                <Form.Item name={`screening_question_${i}`} label={screeningQuestions[i].question}>
+                                <Form.Item name={`screening_question_${i}`} label={screeningQuestions[i].question} shouldUpdate={true}>
                                     <Radio.Group>
                                         <Radio value={true}>Yes</Radio>
                                         <Radio value={false}>No</Radio>
@@ -82,8 +100,14 @@ const Apply = () => {
                             </Col>
 
                             <Col span={8}>
-                                <Form.Item name={`screening_details_${i}`} label="Details">
-                                    <Input />
+                                <Form.Item shouldUpdate>
+                                    {() => {
+                                        return (
+                                            <Form.Item name={`screening_details_${i}`} label="Details">
+                                                <Input disabled={!form.getFieldValue(`screening_question_${i}`)} />
+                                            </Form.Item>
+                                        );
+                                    }}
                                 </Form.Item>
                             </Col>
                         </Row>
@@ -166,16 +190,22 @@ const Apply = () => {
 
                 <Upload.Dragger
                     multiple={false}
+                    showUploadList={false}
+                    accept="image/*"
                     beforeUpload={file => {
                         setWorkId(file);
+                        toBase64(file).then(setWorkIdPreview);
                         return false;
                     }}
                 >
                     <Result
-                        icon={<IdcardOutlined />}
+                        icon={(workId ? <CheckOutlined /> : <IdcardOutlined />)}
+                        status={workId ? 'success' : 'info'}
                         title="Click Here to Upload Work ID"
                         subTitle="You are strongly encouraged to provide your Work ID."
                     />
+
+                    {workIdPreview && <Image src={workIdPreview} width={256} /> }
                 </Upload.Dragger>
 
                 <Divider />
@@ -193,31 +223,31 @@ const Apply = () => {
 
                 <Row gutter={8} wrap>
                     <Col span={8}>
-                        <Form.Item label="Signature of Client/Parent/Legal Guardian" name="signature_name">
+                        <Form.Item label="Signature of Client/Parent/Legal Guardian" name="signature_name" rules={[{required: true}]}>
                             <Input />
                         </Form.Item>
                     </Col>
 
                     <Col span={8}>
-                        <Form.Item label="Print name of Client/Parent/Legal Guardian" name="print_name">
+                        <Form.Item label="Print name of Client/Parent/Legal Guardian" name="print_name" rules={[{required: true}]}>
                             <Input />
                         </Form.Item>
                     </Col>
 
                     <Col span={8}>
-                        <Form.Item label="Guardian Name" name="guardian_name">
+                        <Form.Item label="Guardian Name" name="guardian_name" rules={[{required: true}]}>
                             <Input />
                         </Form.Item>
                     </Col>
 
                     <Col span={12}>
-                        <Form.Item label="Signature Relationship to Patient" name="relationship">
+                        <Form.Item label="Signature Relationship to Patient" name="relationship" rules={[{required: true}]}>
                             <Input />
                         </Form.Item>
                     </Col>
 
                     <Col span={12}>
-                        <Form.Item label="Date" name="signature_date">
+                        <Form.Item label="Date" name="signature_date" rules={[{required: true}]}>
                             <DatePicker format="MM/DD/YYYY" style={{width: '100%'}} />
                         </Form.Item>
                     </Col>

@@ -4,7 +4,6 @@ import {
     AutoComplete,
     Button,
     Card,
-    Checkbox,
     Col,
     Divider,
     Form,
@@ -19,6 +18,7 @@ import logo from '../assets/VallurX Logo Light Transparent.png';
 import { states } from '../lib/static-lists';
 import { axios } from '../lib/axios';
 import { PatientRegistration } from '../lib/types';
+import { Link } from 'react-router-dom';
 
 const RegisterFormStyles: CSSProperties = {
     width: '70%',
@@ -152,7 +152,7 @@ const Register = () => {
                         layout="vertical"
                         initialValues={{suffix: ''}}
                         onFinish={data => {
-                            setPatientData(prevState => ({...prevState, ...data}));
+                            setPatientData(prevState => ({...prevState, ...data, is_mobile: data.is_mobile === 'yes'}));
                             setCurrentStep(1);
                         }}
                     >
@@ -198,9 +198,9 @@ const Register = () => {
                                 <Form.Item label="Sex" name="sex" rules={[{required: true}]}>
                                     <AutoComplete
                                         options={[
-                                            { label: 'Male', value: 'male' },
-                                            { label: 'Female', value: 'female' },
-                                            { label: 'Transgender', value: 'transgender' },
+                                            { label: 'Male', value: 'Male' },
+                                            { label: 'Female', value: 'Female' },
+                                            { label: 'Transgender', value: 'Transgender' },
                                         ]}
                                     />
                                 </Form.Item>
@@ -210,11 +210,11 @@ const Register = () => {
                                 <Form.Item label="Race" name="race" rules={[{required: true}]}>
                                     <AutoComplete
                                         options={[
-                                            { label: 'American Indian', value: 'american_indian' },
-                                            { label: 'Asian', value: 'asian' },
-                                            { label: 'Black', value: 'black' },
-                                            { label: 'Pacific Islander', value: 'pacific_islander' },
-                                            { label: 'White', value: 'white' }
+                                            { label: 'American Indian', value: 'American Indian' },
+                                            { label: 'Asian', value: 'Asian' },
+                                            { label: 'Black', value: 'Black' },
+                                            { label: 'Pacific Islander', value: 'Pacific Islander' },
+                                            { label: 'White', value: 'White' }
                                         ]}
                                     />
                                 </Form.Item>
@@ -242,11 +242,16 @@ const Register = () => {
                                         {pattern: /^(\d{3})-?(\d{3})-?(\d{4})$/, message: 'Must be a valid phone number!'}
                                     ]}
                                 >
-                                    <Input />
-                                </Form.Item>
-
-                                <Form.Item label="Is that phone number for a mobile phone?" name="is_mobile" valuePropName="checked">
-                                    <Checkbox />
+                                    <Input
+                                        addonBefore={(
+                                            <Form.Item name="is_mobile" noStyle rules={[{required: true}]}>
+                                                <Select style={{ width: 120 }}>
+                                                    <Select.Option value="yes">Mobile</Select.Option>
+                                                    <Select.Option value="no">Home</Select.Option>
+                                                </Select>
+                                            </Form.Item>
+                                        )}
+                                    />
                                 </Form.Item>
                             </Col>
 
@@ -512,7 +517,7 @@ const Register = () => {
                                 { required: true, message: 'Password is required.' },
                                 {
                                     pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$/,
-                                    message: 'Password requires a number and special character, and must be at least 12 characters long.'
+                                    message: 'Password requires upper and lowercase letters, a number and special character, and must be at least 12 characters long.'
                                 }
                             ]}
                         >
@@ -567,6 +572,11 @@ const Register = () => {
                         subTitle={(
                             <span>Now that you have created an account, you can apply for the COVID-19 vaccine on your Patient Dashboard. Please check your email for a confirmation from VallurX to continue.</span>
                         )}
+                        extra={[
+                            <Link to="/login" key={1}>
+                                <Button type="primary">Login</Button>
+                            </Link>
+                        ]}
                     />
                 )}
             </Card>

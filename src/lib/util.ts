@@ -13,3 +13,13 @@ export const formattedName = (userObj: FormattedNameArgs): string => {
 
     return first + middle + last + suffix;
 }
+
+export const toBase64 = (blob: Blob): Promise<string> => {
+    return new Promise<string>(resolve => {
+        const reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onloadend = function() {
+            resolve(reader.result as string);
+        }
+    })
+}
