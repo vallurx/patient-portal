@@ -223,7 +223,7 @@ const Register = () => {
                             <Col span={6}>
                                 <Form.Item label="Ethnicity" name="ethnicity" rules={[{required: true}]}>
                                     <Select>
-                                        <Select.Option value="non-hispanic">Non-Hispanic</Select.Option>
+                                        <Select.Option value="nonhispanic">Non-Hispanic</Select.Option>
                                         <Select.Option value="hispanic">Hispanic</Select.Option>
                                     </Select>
                                 </Form.Item>
@@ -281,9 +281,9 @@ const Register = () => {
                             </Col>
                             <Col span={4}>
                                 <Form.Item name="address_state" label="State" rules={[{required: true}]}>
-                                    <Select>
+                                    <Select optionFilterProp="name" showSearch={true}>
                                         {states.map(state => (
-                                            <Select.Option key={state.abbreviation} value={state.abbreviation}>{state.name}</Select.Option>
+                                            <Select.Option key={state.abbreviation} name={state.name} value={state.abbreviation}>{state.name}</Select.Option>
                                         ))}
                                     </Select>
                                 </Form.Item>
