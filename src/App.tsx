@@ -16,6 +16,7 @@ import Login from './routes/Login';
 import Register from './routes/Register';
 import Confirm from './routes/Confirm';
 import AuthenticatedRoute from './components/AuthenticatedRoute';
+import LoginRoute from './components/LoginRoute';
 import Dashboard from './routes/Dashboard';
 import PatientInformation from './routes/PatientInformation';
 import Apply from './routes/Apply';
@@ -100,23 +101,29 @@ const App = () => {
     return (
         <BrowserRouter basename={process.env.NODE_ENV === 'production' ? '/patient' : ''}>
             <Switch>
-                <Route path="/login" exact>
-                    <LoginWrapper>
-                        <Login />
-                    </LoginWrapper>
-                </Route>
+                <LoginRoute path="/" exact>
+                    <Route path="/login" exact>
+                        <LoginWrapper>
+                            <Login />
+                        </LoginWrapper>
+                    </Route>
+                </LoginRoute>
 
-                <Route path="/register" exact>
-                    <LoginWrapper>
-                        <Register />
-                    </LoginWrapper>
-                </Route>
+                <LoginRoute path="/" exact>
+                    <Route path="/register" exact>
+                        <LoginWrapper>
+                            <Register />
+                        </LoginWrapper>
+                    </Route>
+                </LoginRoute>
 
-                <Route path="/confirm" exact>
-                    <LoginWrapper>
-                        <Confirm />
-                    </LoginWrapper>
-                </Route>
+                <LoginRoute path="/" exact>
+                    <Route path="/confirm" exact>
+                        <LoginWrapper>
+                            <Confirm />
+                        </LoginWrapper>
+                    </Route>
+                </LoginRoute>
 
                 <AuthenticatedRoute path="/" exact>
                     <AuthedWrapper>
