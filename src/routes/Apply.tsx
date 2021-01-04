@@ -249,7 +249,7 @@ const Apply = () => {
 
                     <Col span={12}>
                         <Form.Item label="Date" name="signature_date" rules={[{required: true}]}>
-                            <DatePicker format="MM/DD/YYYY" style={{width: '100%'}} />
+                            <DatePicker format="M/D/YYYY" style={{width: '100%'}} />
                         </Form.Item>
                     </Col>
                 </Row>
