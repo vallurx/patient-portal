@@ -48,14 +48,14 @@ const AuthedWrapper = (props: { children: any }) => {
     ];
 
     const logOut = () => {
-        localStorage.removeItem('session_id');
-        localStorage.removeItem('user_id');
+        localStorage.removeItem('patient_session_id');
+        localStorage.removeItem('patient_user_id');
     };
 
     useEffect(() => {
         axios.defaults = {
             headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('session_id')
+                Authorization: 'Bearer ' + localStorage.getItem('patient_session_id')
             }
         }
     });

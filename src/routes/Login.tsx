@@ -31,8 +31,8 @@ const Login = () => {
             const loginResponse = await axios.put<PatientLoginResponse>('/api/patients/login', data);
             const { id, session_id } = loginResponse.data;
 
-            localStorage.setItem('user_id', id.toString());
-            localStorage.setItem('session_id', session_id);
+            localStorage.setItem('patient_user_id', id.toString());
+            localStorage.setItem('patient_session_id', session_id);
 
             await mutate();
 
