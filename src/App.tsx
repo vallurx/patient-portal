@@ -1,20 +1,25 @@
-import React, { CSSProperties, useEffect, useState } from 'react';
+import React, { CSSProperties, useEffect } from 'react';
 import styles from './App.module.css';
 import {
     DashboardOutlined,
-    ExperimentOutlined,
     LogoutOutlined,
-    OrderedListOutlined,
-    SafetyCertificateOutlined,
     SolutionOutlined,
     UserOutlined
 } from '@ant-design/icons';
 import logo from './assets/VallurX Logo Dark Transparent.png';
-import { useRouteMatch } from 'react-router';
+import { Route, useRouteMatch } from 'react-router-dom';
 import { axios } from './lib/axios';
-import { Button, Layout, Menu } from 'antd';
-import { BrowserRouter, Link } from 'react-router-dom';
+import { Button, Layout, Menu, Result } from 'antd';
+import { BrowserRouter, Link, Switch } from 'react-router-dom';
 import 'antd/dist/antd.min.css';
+import Login from './routes/Login';
+import Register from './routes/Register';
+import Confirm from './routes/Confirm';
+import AuthenticatedRoute from './components/AuthenticatedRoute';
+import Dashboard from './routes/Dashboard';
+import PatientInformation from './routes/PatientInformation';
+import Apply from './routes/Apply';
+import Schedule from './routes/Schedule';
 
 const logoStyles: CSSProperties = {
     margin: '0 20px',
@@ -35,7 +40,6 @@ const LoginWrapper = (props: { children: any }) => {
 
 const AuthedWrapper = (props: { children: any }) => {
     const asPath = useRouteMatch();
-    const [inviteUserVisible, setInviteUserVisible] = useState(false);
 
     const routes = [
         { href: `/`, title: 'Dashboard', icon: <DashboardOutlined /> },
@@ -79,7 +83,7 @@ const AuthedWrapper = (props: { children: any }) => {
                 </Menu>
             </Layout.Header>
 
-            <Layout.Content style={{padding: '0 50px', overflow: 'scroll'}}>
+            <Layout.Content className={styles.LayoutContent}>
                 <div className={styles.Content}>
                     {props.children}
                 </div>
@@ -91,10 +95,65 @@ const AuthedWrapper = (props: { children: any }) => {
 
 const App = () => {
     return (
-        <BrowserRouter>
-            <AuthedWrapper>
-                <h1>Hello World!</h1>
-            </AuthedWrapper>
+        <BrowserRouter basename={process.env.NODE_ENV === 'production' ? '/portal' : ''}>
+            <Switch>
+                <Route path="/login" exact>
+                    <LoginWrapper>
+                        <Login />
+                    </LoginWrapper>
+                </Route>
+
+                <Route path="/register" exact>
+                    <LoginWrapper>
+                        <Register />
+                    </LoginWrapper>
+                </Route>
+
+                <Route path="/confirm" exact>
+                    <LoginWrapper>
+                        <Confirm />
+                    </LoginWrapper>
+                </Route>
+
+                <AuthenticatedRoute path="/" exact>
+                    <AuthedWrapper>
+                        <Dashboard />
+                    </AuthedWrapper>
+                </AuthenticatedRoute>
+
+                <AuthenticatedRoute path="/patient-information" exact>
+                    <AuthedWrapper>
+                        <PatientInformation />
+                    </AuthedWrapper>
+                </AuthenticatedRoute>
+
+                <AuthenticatedRoute path="/apply" exact>
+                    <AuthedWrapper>
+                        <Apply />
+                    </AuthedWrapper>
+                </AuthenticatedRoute>
+
+                <AuthenticatedRoute path="/schedule/:id" exact>
+                    <AuthedWrapper>
+                        <Schedule />
+                    </AuthedWrapper>
+                </AuthenticatedRoute>
+
+                <Route>
+                    <LoginWrapper>
+                        <Result
+                            status="404"
+                            title="404"
+                            subTitle="Sorry, the page you visited does not exist."
+                            extra={(
+                                <Link to="/">
+                                    <Button type="primary">Back Home</Button>
+                                </Link>
+                            )}
+                        />
+                    </LoginWrapper>
+                </Route>
+            </Switch>
         </BrowserRouter>
     )
 };

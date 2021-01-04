@@ -3,9 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { SWRConfig } from 'swr';
+import { fetcher } from './lib/fetcher';
+import dayjs from 'dayjs';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
+dayjs.extend(localizedFormat);
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 ReactDOM.render(
-    <App />,
+    <SWRConfig value={{fetcher: fetcher, shouldRetryOnError: false, revalidateOnFocus: false}}>
+        <App/>
+    </SWRConfig>,
   document.getElementById('root')
 );
 

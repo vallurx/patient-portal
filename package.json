@@ -2,6 +2,7 @@
   "name": "patient",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://73.222.115.200:9095",
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
     "@testing-library/jest-dom": "^5.11.8",
