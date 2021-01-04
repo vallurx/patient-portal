@@ -160,7 +160,7 @@ const Register = () => {
 
                         <Row gutter={8}>
                             <Col span={7}>
-                                <Form.Item label="First Name" name="first_name" rules={[{required: true}]}>
+                                <Form.Item label="First Name" name="first_name" rules={[{required: true, message: 'Required'}]}>
                                     <Input />
                                 </Form.Item>
                             </Col>
@@ -170,7 +170,7 @@ const Register = () => {
                                 </Form.Item>
                             </Col>
                             <Col span={7}>
-                                <Form.Item label="Last Name" name="last_name" rules={[{required: true}]}>
+                                <Form.Item label="Last Name" name="last_name" rules={[{required: true, message: 'Required'}]}>
                                     <Input />
                                 </Form.Item>
                             </Col>
@@ -188,14 +188,14 @@ const Register = () => {
                                 <Form.Item
                                     label="Date of Birth"
                                     name="date_of_birth"
-                                    rules={[{required: true}]}
+                                    rules={[{required: true, message: 'Required'}]}
                                 >
                                     <DatePicker style={{width: '100%'}} format="M/D/YYYY" />
                                 </Form.Item>
                             </Col>
 
                             <Col span={6}>
-                                <Form.Item label="Sex" name="sex" rules={[{required: true}]}>
+                                <Form.Item label="Sex" name="sex" rules={[{required: true, message: 'Required'}]}>
                                     <AutoComplete
                                         options={[
                                             { label: 'Male', value: 'Male' },
@@ -207,7 +207,7 @@ const Register = () => {
                             </Col>
 
                             <Col span={6}>
-                                <Form.Item label="Race" name="race" rules={[{required: true}]}>
+                                <Form.Item label="Race" name="race" rules={[{required: true, message: 'Required'}]}>
                                     <AutoComplete
                                         options={[
                                             { label: 'American Indian', value: 'American Indian' },
@@ -221,7 +221,7 @@ const Register = () => {
                             </Col>
 
                             <Col span={6}>
-                                <Form.Item label="Ethnicity" name="ethnicity" rules={[{required: true}]}>
+                                <Form.Item label="Ethnicity" name="ethnicity" rules={[{required: true, message: 'Required'}]}>
                                     <Select>
                                         <Select.Option value="nonhispanic">Non-Hispanic</Select.Option>
                                         <Select.Option value="hispanic">Hispanic</Select.Option>
@@ -238,7 +238,7 @@ const Register = () => {
                                     name="phone_number"
                                     label="Phone Number"
                                     rules={[
-                                        {required: true},
+                                        {required: true, message: 'Required'},
                                         {pattern: /^(\d{3})-?(\d{3})-?(\d{4})$/, message: 'Must be a valid phone number!'}
                                     ]}
                                 >
@@ -256,13 +256,13 @@ const Register = () => {
                             </Col>
 
                             <Col span={8}>
-                                <Form.Item name="email" label="Email" rules={[{required: true}, {type: 'email', message: 'Must be a valid email!'}]}>
+                                <Form.Item name="email" label="Email" rules={[{required: true, message: 'Required'}, {type: 'email', message: 'Must be a valid email!'}]}>
                                     <Input />
                                 </Form.Item>
                             </Col>
 
                             <Col span={8}>
-                                <Form.Item label="Employer" name="employer" rules={[{required: true}]}>
+                                <Form.Item label="Employer" name="employer" rules={[{required: true, message: 'Required'}]}>
                                     <Input />
                                 </Form.Item>
                             </Col>
@@ -270,17 +270,17 @@ const Register = () => {
 
                         <Row gutter={8} wrap>
                             <Col span={8}>
-                                <Form.Item name="address_street" label="Street Address" rules={[{required: true}]}>
+                                <Form.Item name="address_street" label="Street Address" rules={[{required: true, message: 'Required'}]}>
                                     <Input />
                                 </Form.Item>
                             </Col>
                             <Col span={4}>
-                                <Form.Item name="address_city" label="City" rules={[{required: true}]}>
+                                <Form.Item name="address_city" label="City" rules={[{required: true, message: 'Required'}]}>
                                     <Input />
                                 </Form.Item>
                             </Col>
                             <Col span={4}>
-                                <Form.Item name="address_state" label="State" rules={[{required: true}]}>
+                                <Form.Item name="address_state" label="State" rules={[{required: true, message: 'Required'}]}>
                                     <Select optionFilterProp="name" showSearch={true}>
                                         {states.map(state => (
                                             <Select.Option key={state.abbreviation} name={state.name} value={state.abbreviation}>{state.name}</Select.Option>
@@ -289,12 +289,12 @@ const Register = () => {
                                 </Form.Item>
                             </Col>
                             <Col span={4}>
-                                <Form.Item name="address_zip" label="Zip" rules={[{required: true}]}>
+                                <Form.Item name="address_zip" label="Zip" rules={[{required: true, message: 'Required'}]}>
                                     <Input />
                                 </Form.Item>
                             </Col>
                             <Col span={4}>
-                                <Form.Item name="address_county" label="County" rules={[{required: true}]}>
+                                <Form.Item name="address_county" label="County" rules={[{required: true, message: 'Required'}]}>
                                     <Input />
                                 </Form.Item>
                             </Col>

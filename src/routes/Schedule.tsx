@@ -122,7 +122,7 @@ const Schedule = () => {
                         style={{width: '50%', margin: 'auto'}}
                         onFinish={onFinish}
                     >
-                        <Form.Item name="id" label="Time Slot" rules={[{required: true}]}>
+                        <Form.Item name="id" label="Time Slot" rules={[{required: true, message: 'Required'}]}>
                             <Select style={{width: '100%'}}>
                                 {scheduleBlocks?.filter(b => dayjs(selectedDay).isSame(dayjs(b.start_at), 'day')).map(block => (
                                     <Select.Option value={block.id} key={block.id}>

@@ -118,7 +118,7 @@ const Apply = () => {
 
                 <Row>
                     <Col xxl={12} xl={12} lg={12} md={24} sm={24} xs={24}>
-                        <Form.Item name="target_population" label="Target Population" rules={[{required: true}]}>
+                        <Form.Item name="target_population" label="Target Population" rules={[{required: true, message: 'Required'}]}>
                             <Select>
                                 <Select.Option value="Assisted Living Facility - Resident">
                                     Assisted Living Facility - Resident
@@ -223,19 +223,19 @@ const Apply = () => {
 
                 <Row gutter={8} wrap>
                     <Col span={8}>
-                        <Form.Item label="Signature of Client/Parent/Legal Guardian" name="signature_name" rules={[{required: true}]}>
+                        <Form.Item label="Signature of Client/Parent/Legal Guardian" name="signature_name" rules={[{required: true, message: 'Required'}]}>
                             <Input />
                         </Form.Item>
                     </Col>
 
                     <Col span={8}>
-                        <Form.Item label="Print name of Client/Parent/Legal Guardian" name="print_name" rules={[{required: true}]}>
+                        <Form.Item label="Print name of Client/Parent/Legal Guardian" name="print_name" rules={[{required: true, message: 'Required'}]}>
                             <Input />
                         </Form.Item>
                     </Col>
                     {/* 
                     <Col span={8}>
-                        <Form.Item label="Guardian Name" name="guardian_name" rules={[{required: true}]}>
+                        <Form.Item label="Guardian Name" name="guardian_name" rules={[{required: true, message: 'Required'}]}>
                             <Input />
                         </Form.Item>
                     </Col>
@@ -248,7 +248,7 @@ const Apply = () => {
                     </Col>
 
                     <Col span={12}>
-                        <Form.Item label="Date" name="signature_date" rules={[{required: true}]}>
+                        <Form.Item label="Date" name="signature_date" rules={[{required: true, message: 'Required'}]}>
                             <DatePicker format="M/D/YYYY" style={{width: '100%'}} />
                         </Form.Item>
                     </Col>
