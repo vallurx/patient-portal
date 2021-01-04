@@ -20,6 +20,7 @@ import Dashboard from './routes/Dashboard';
 import PatientInformation from './routes/PatientInformation';
 import Apply from './routes/Apply';
 import Schedule from './routes/Schedule';
+import { usePatient } from './lib/data/use-patient';
 
 const logoStyles: CSSProperties = {
     margin: '0 20px',
@@ -40,6 +41,7 @@ const LoginWrapper = (props: { children: any }) => {
 
 const AuthedWrapper = (props: { children: any }) => {
     const asPath = useRouteMatch();
+    const { patient, mutate } = usePatient();
 
     const routes = [
         { href: `/`, title: 'Dashboard', icon: <DashboardOutlined /> },
@@ -50,6 +52,7 @@ const AuthedWrapper = (props: { children: any }) => {
     const logOut = () => {
         localStorage.removeItem('patient_session_id');
         localStorage.removeItem('patient_user_id');
+        mutate();
     };
 
     useEffect(() => {
