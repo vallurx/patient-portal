@@ -244,7 +244,7 @@ const Register = () => {
                                 >
                                     <Input
                                         addonBefore={(
-                                            <Form.Item name="is_mobile" noStyle rules={[{required: true}]}>
+                                            <Form.Item name="is_mobile" noStyle rules={[{required: true, message: 'Required'}]}>
                                                 <Select style={{ width: 120 }}>
                                                     <Select.Option value="yes">Mobile</Select.Option>
                                                     <Select.Option value="no">Home</Select.Option>
@@ -373,7 +373,7 @@ const Register = () => {
                             <Col span={8}>
                                 <Form.Item
                                     name="insurance_policy"
-                                    label="Insurance Policy"
+                                    label="Policy Number"
                                     dependencies={['ssn']}
                                     rules={[
                                         ssnFormValidator
@@ -385,7 +385,7 @@ const Register = () => {
                             <Col span={8}>
                                 <Form.Item
                                     name="insurance_group"
-                                    label="Insurance Group"
+                                    label="Group Number"
                                     dependencies={['ssn']}
                                     rules={[
                                         ssnFormValidator
