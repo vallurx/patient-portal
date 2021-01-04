@@ -101,28 +101,22 @@ const App = () => {
     return (
         <BrowserRouter basename={process.env.NODE_ENV === 'production' ? '/patient' : ''}>
             <Switch>
-                <LoginRoute path="/" exact>
-                    <Route path="/login" exact>
-                        <LoginWrapper>
-                            <Login />
-                        </LoginWrapper>
-                    </Route>
+                <LoginRoute path="/login" exact>
+                    <LoginWrapper>
+                        <Login />
+                    </LoginWrapper>
                 </LoginRoute>
 
-                <LoginRoute path="/" exact>
-                    <Route path="/register" exact>
-                        <LoginWrapper>
-                            <Register />
-                        </LoginWrapper>
-                    </Route>
+                <LoginRoute path="/register" exact>
+                    <LoginWrapper>
+                        <Register />
+                    </LoginWrapper>
                 </LoginRoute>
 
-                <LoginRoute path="/" exact>
-                    <Route path="/confirm" exact>
-                        <LoginWrapper>
-                            <Confirm />
-                        </LoginWrapper>
-                    </Route>
+                <LoginRoute path="/confirm" exact>
+                    <LoginWrapper>
+                        <Confirm />
+                    </LoginWrapper>
                 </LoginRoute>
 
                 <AuthenticatedRoute path="/" exact>
