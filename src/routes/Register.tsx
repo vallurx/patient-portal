@@ -165,7 +165,7 @@ const Register = () => {
                                 </Form.Item>
                             </Col>
                             <Col span={7}>
-                                <Form.Item label="Middle Initial" name="middle_initial" rules={[{required: true}]}>
+                                <Form.Item label="Middle Initial" name="middle_initial">
                                     <Input />
                                 </Form.Item>
                             </Col>
@@ -190,7 +190,7 @@ const Register = () => {
                                     name="date_of_birth"
                                     rules={[{required: true}]}
                                 >
-                                    <DatePicker style={{width: '100%'}} format="MM/DD/YYYY" />
+                                    <DatePicker style={{width: '100%'}} format="M/D/YYYY" />
                                 </Form.Item>
                             </Col>
 

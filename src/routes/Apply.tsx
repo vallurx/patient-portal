@@ -44,7 +44,7 @@ const Apply = () => {
 
             const res = await axios.put('/api/patients/applications', {
                 facility_id: 1,
-                guardian_name: data.guardian_name,
+                guardian_name: data.signature_name,
                 target_population: data.target_population,
                 signature_name: data.signature_name,
                 signature_date: data.signature_date.format('MM/DD/YYYY'),
@@ -233,15 +233,16 @@ const Apply = () => {
                             <Input />
                         </Form.Item>
                     </Col>
-
+                    {/* 
                     <Col span={8}>
                         <Form.Item label="Guardian Name" name="guardian_name" rules={[{required: true}]}>
                             <Input />
                         </Form.Item>
                     </Col>
+                    */}
 
                     <Col span={12}>
-                        <Form.Item label="Signature Relationship to Patient" name="relationship" rules={[{required: true}]}>
+                        <Form.Item label="Signature Relationship to Patient" name="relationship">
                             <Input />
                         </Form.Item>
                     </Col>
