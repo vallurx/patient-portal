@@ -95,7 +95,7 @@ const AuthedWrapper = (props: { children: any }) => {
 
 const App = () => {
     return (
-        <BrowserRouter basename={process.env.NODE_ENV === 'production' ? '/portal' : ''}>
+        <BrowserRouter basename={process.env.NODE_ENV === 'production' ? '/patient' : ''}>
             <Switch>
                 <Route path="/login" exact>
                     <LoginWrapper>
