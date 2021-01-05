@@ -53,7 +53,7 @@ const Apply = () => {
                 signature_name: data.signature_name,
                 signature_date: data.signature_date.format('MM/DD/YYYY'),
                 print_name: data.print_name,
-                relationship: data.relationship,
+                relationship: data.relationship || '',
                 screening_questions: screeningFormData,
                 has_image: !!workId
             });
