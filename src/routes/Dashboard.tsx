@@ -112,9 +112,9 @@ const Dashboard = () => {
                                 style={{height: '100%'}}
                             >
                                 <Result
-                                    title={item.status}
+                                    title={prettyStatuses[item.status] || item.status}
                                     icon={resultStatus.icon}
-                                    status={prettyStatuses[resultStatus.status] || resultStatus.status}
+                                    status={resultStatus.status}
                                     subTitle={(
                                         <>
                                             {getResultInfo(item.status)}
