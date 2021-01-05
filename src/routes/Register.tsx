@@ -232,6 +232,38 @@ const Register = () => {
 
                         <Divider orientation="left">Contact Information</Divider>
 
+                        <Row gutter={8} wrap>
+                            <Col span={8}>
+                                <Form.Item name="address_street" label="Street Address" rules={[{required: true, message: 'Required'}]}>
+                                    <Input />
+                                </Form.Item>
+                            </Col>
+                            <Col span={4}>
+                                <Form.Item name="address_city" label="City" rules={[{required: true, message: 'Required'}]}>
+                                    <Input />
+                                </Form.Item>
+                            </Col>
+                            <Col span={4}>
+                                <Form.Item name="address_state" label="State" rules={[{required: true, message: 'Required'}]}>
+                                    <Select optionFilterProp="name" showSearch={true}>
+                                        {states.map(state => (
+                                            <Select.Option key={state.abbreviation} name={state.name} value={state.abbreviation}>{state.name}</Select.Option>
+                                        ))}
+                                    </Select>
+                                </Form.Item>
+                            </Col>
+                            <Col span={4}>
+                                <Form.Item name="address_zip" label="Zip" rules={[{required: true, message: 'Required'}]}>
+                                    <Input />
+                                </Form.Item>
+                            </Col>
+                            <Col span={4}>
+                                <Form.Item name="address_county" label="County" rules={[{required: true, message: 'Required'}]}>
+                                    <Input />
+                                </Form.Item>
+                            </Col>
+                        </Row>
+
                         <Row gutter={8}>
                             <Col span={8}>
                                 <Form.Item
@@ -263,38 +295,6 @@ const Register = () => {
 
                             <Col span={8}>
                                 <Form.Item label="Employer" name="employer" rules={[{required: true, message: 'Required'}]}>
-                                    <Input />
-                                </Form.Item>
-                            </Col>
-                        </Row>
-
-                        <Row gutter={8} wrap>
-                            <Col span={8}>
-                                <Form.Item name="address_street" label="Street Address" rules={[{required: true, message: 'Required'}]}>
-                                    <Input />
-                                </Form.Item>
-                            </Col>
-                            <Col span={4}>
-                                <Form.Item name="address_city" label="City" rules={[{required: true, message: 'Required'}]}>
-                                    <Input />
-                                </Form.Item>
-                            </Col>
-                            <Col span={4}>
-                                <Form.Item name="address_state" label="State" rules={[{required: true, message: 'Required'}]}>
-                                    <Select optionFilterProp="name" showSearch={true}>
-                                        {states.map(state => (
-                                            <Select.Option key={state.abbreviation} name={state.name} value={state.abbreviation}>{state.name}</Select.Option>
-                                        ))}
-                                    </Select>
-                                </Form.Item>
-                            </Col>
-                            <Col span={4}>
-                                <Form.Item name="address_zip" label="Zip" rules={[{required: true, message: 'Required'}]}>
-                                    <Input />
-                                </Form.Item>
-                            </Col>
-                            <Col span={4}>
-                                <Form.Item name="address_county" label="County" rules={[{required: true, message: 'Required'}]}>
                                     <Input />
                                 </Form.Item>
                             </Col>
