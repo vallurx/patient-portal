@@ -291,3 +291,12 @@ export const screeningQuestions = [
         type: 'text',
     },
 ];
+
+export const prettyStatuses = {
+    AwaitingApproval: 'Awaiting Approval',
+    Scheduling: 'Scheduling',
+    Rejected: 'Rejected',
+    Scheduled: 'Scheduled',
+    InformationNeeded: 'Information Needed',
+    Vaccinated: 'Vaccinated',
+};

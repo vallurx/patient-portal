@@ -10,6 +10,7 @@ import dayjs from 'dayjs';
 import { CalendarOutlined, CommentOutlined, EllipsisOutlined, ScheduleOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { axios } from '../lib/axios';
+import { prettyStatuses } from '../lib/static-lists';
 
 const getResultStatus = (status: ApplicationStatus): { status: ResultStatusType, icon: ReactNode } => {
     switch (status) {
@@ -113,7 +114,7 @@ const Dashboard = () => {
                                 <Result
                                     title={item.status}
                                     icon={resultStatus.icon}
-                                    status={resultStatus.status}
+                                    status={prettyStatuses[resultStatus.status] || resultStatus.status}
                                     subTitle={(
                                         <>
                                             {getResultInfo(item.status)}
