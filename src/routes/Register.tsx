@@ -151,7 +151,7 @@ const Register = () => {
                     <Form
                         form={patientInfoForm}
                         layout="vertical"
-                        initialValues={{suffix: ''}}
+                        initialValues={{suffix: '', middle_initial: ''}}
                         onFinish={data => {
                             setPatientData(prevState => ({...prevState, ...data, is_mobile: data.is_mobile === 'yes'}));
                             setCurrentStep(1);
