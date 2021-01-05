@@ -90,7 +90,15 @@ const Dashboard = () => {
                 dataSource={applications}
                 locale={{
                     emptyText: (
-                        <Empty description="You have not applied for any vaccines yet." />
+                        <Empty
+                            description="You have not applied for any vaccines yet."
+                        >
+                            <Link to="/apply">
+                                <Button type="primary" size="large">
+                                    Apply Now
+                                </Button>
+                            </Link>
+                        </Empty>
                     )
                 }}
                 renderItem={item => {

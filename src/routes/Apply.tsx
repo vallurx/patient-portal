@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Button,
     Col,
@@ -10,7 +10,7 @@ import {
     Radio,
     Result,
     Row,
-    Select,
+    Select, Spin,
     Typography,
     Upload
 } from 'antd';
@@ -22,10 +22,14 @@ import { CheckOutlined, IdcardOutlined } from '@ant-design/icons';
 import { RcFile } from 'antd/es/upload';
 import { useHistory } from 'react-router-dom';
 import { toBase64 } from '../lib/util';
+import { usePatientApplications, useVaccines } from '../lib/data/use-application';
 
 const Apply = () => {
     const history = useHistory();
+    const { applications } = usePatientApplications();
+    const { vaccines } = useVaccines();
     const [form] = Form.useForm();
+    const [applyState, setApplyState] = useState<'loading' | 'apply' | 'rekt'>('loading');
     const [workId, setWorkId] = useState<RcFile | undefined>();
     const [workIdPreview, setWorkIdPreview] = useState<string | undefined>();
 
@@ -76,6 +80,43 @@ const Apply = () => {
                 description: 'There was an error processing your application.'
             });
         }
+    };
+
+    useEffect(() => {
+        if (vaccines && applications) {
+            if (applications.length === 0) {
+                setApplyState('apply');
+                return;
+            }
+
+            if (applications.length === 1) {
+                const app = applications[0];
+                const doses = vaccines.flatMap(v => v.doses);
+                const currentDose = doses.find(d => d.id === app.vaccine_dose_id);
+
+                // If the application's dose is not the highest index
+                if (app.status === 'Vaccinated' && currentDose && doses.some(d => d.index > currentDose.index)) {
+                    setApplyState('apply');
+                    return;
+                }
+            }
+
+            setApplyState('rekt');
+        }
+    }, [vaccines, applications]);
+
+    if (applyState === 'loading') {
+        return <Spin size="large" spinning style={{width: '100%'}} />;
+    }
+
+    if (applyState === 'rekt') {
+        return (
+            <Result
+                title="Sorry!"
+                subTitle="You are either fully vaccinated or have a pending application."
+                status="warning"
+            />
+        );
     }
 
     return (
