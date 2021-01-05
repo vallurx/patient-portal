@@ -51,7 +51,7 @@ const Register = () => {
         const lowerCharset = 'abcdefghijklmnopqrstuvwxyz';
         const upperCharset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         const numberCharset = '0123456789';
-        const specialCharset = '@$!%*?&';
+        const specialCharset = '@$!%*?&#';
         const charsetArray = [lowerCharset, upperCharset, numberCharset, specialCharset];
 
         let retVal = '';
@@ -516,7 +516,7 @@ const Register = () => {
                             rules={[
                                 { required: true, message: 'Password is required.' },
                                 {
-                                    pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$/,
+                                    pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{12,}$/,
                                     message: 'Password requires upper and lowercase letters, a number and special character, and must be at least 12 characters long.'
                                 }
                             ]}
