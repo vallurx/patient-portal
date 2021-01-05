@@ -19,6 +19,7 @@ import { states } from '../lib/static-lists';
 import { axios } from '../lib/axios';
 import { PatientRegistration } from '../lib/types';
 import { Link } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 const RegisterFormStyles: CSSProperties = {
     width: '70%',
@@ -190,7 +191,7 @@ const Register = () => {
                                     name="date_of_birth"
                                     rules={[{required: true, message: 'Required'}]}
                                 >
-                                    <DatePicker style={{width: '100%'}} format="M/D/YYYY" />
+                                    <DatePicker style={{width: '100%'}} format="M/D/YYYY" placeholder={dayjs().format("M/D/YYYY")} />
                                 </Form.Item>
                             </Col>
 

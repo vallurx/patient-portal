@@ -23,6 +23,7 @@ import { RcFile } from 'antd/es/upload';
 import { useHistory } from 'react-router-dom';
 import { toBase64 } from '../lib/util';
 import { usePatientApplications, useVaccines } from '../lib/data/use-application';
+import dayjs from 'dayjs';
 
 const Apply = () => {
     const history = useHistory();
@@ -84,13 +85,14 @@ const Apply = () => {
 
     useEffect(() => {
         if (vaccines && applications) {
-            if (applications.length === 0) {
+            let apps = applications.filter((x: any) => x.status != "Rejected");
+            if (apps.length === 0) {
                 setApplyState('apply');
                 return;
             }
 
-            if (applications.length === 1) {
-                const app = applications[0];
+            if (apps.length === 1) {
+                const app = apps[0];
                 const doses = vaccines.flatMap(v => v.doses);
                 const currentDose = doses.find(d => d.id === app.vaccine_dose_id);
 
@@ -291,7 +293,7 @@ const Apply = () => {
 
                     <Col span={12}>
                         <Form.Item label="Date" name="signature_date" rules={[{required: true, message: 'Required'}]}>
-                            <DatePicker format="M/D/YYYY" style={{width: '100%'}} />
+                            <DatePicker  placeholder={dayjs().format("M/D/YYYY")} format="M/D/YYYY" style={{width: '100%'}} />
                         </Form.Item>
                     </Col>
                 </Row>
