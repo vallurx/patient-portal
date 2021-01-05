@@ -47,7 +47,7 @@ const AuthedWrapper = (props: { children: any }) => {
     const routes = [
         { href: `/`, title: 'Dashboard', icon: <DashboardOutlined /> },
         { href: '/patient-information', title: 'Patient Information', icon: <UserOutlined /> },
-        { href: '/apply', title: 'Vaccine Application', icon: <SolutionOutlined /> }
+        { href: '/apply', title: 'Apply for Vaccine', icon: <SolutionOutlined /> }
     ];
 
     const logOut = () => {
@@ -57,12 +57,10 @@ const AuthedWrapper = (props: { children: any }) => {
     };
 
     useEffect(() => {
-        axios.defaults = {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('patient_session_id')
-            }
+        if (patient) {
+            axios.defaults.headers.Authorization = 'Bearer ' + localStorage.getItem('patient_session_id');
         }
-    });
+    }, [patient]);
 
     return (
         <Layout className={styles.Layout}>

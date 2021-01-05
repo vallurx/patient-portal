@@ -27,6 +27,7 @@ export interface Application {
     target_populations?: string;
     screening_questions: ScreeningQuestion[];
     status: ApplicationStatus;
+    vaccine_dose_id: number;
 }
 
 export interface Facility {
